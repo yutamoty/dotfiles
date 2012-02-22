@@ -7,8 +7,7 @@ export LANG=ja_JP.UTF-8
 # パスの設定
 
 # エイリアスの設定
-#uname | grep -q "Darwin" || alias ls='ls -G' && alias ls='ls --color=auto'
-uname | grep -q "Darwin" && alias ls='ls --color=auto' || alias ls='ls -G'
+uname | grep -q "Darwin" && alias ls='ls -G' || alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
 # 関数
