@@ -1,6 +1,6 @@
 #!/bin/sh
 
-config="gitconfig zshrc vimrc vim tmux.conf"
+config="gitconfig zlogin zshrc vimrc vim tmux.conf"
 
 cd $(dirname $0)
 
