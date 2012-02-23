@@ -1,0 +1,7 @@
+(define default-im-name 'skk)
+(define skk-dic-file-name "/home/yuta/.SKK-JISYO.LL")
+(define skk-personal-dic-filename
+ (string-append (getenv "HOME") "/.skk-jisyo"))
+(define skk-uim-personal-dic-filename
+ (string-append (getenv "HOME") "/.skk-uim-jisyo"))
+(define skk-use-with-vi? #t)
