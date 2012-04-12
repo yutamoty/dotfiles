@@ -46,6 +46,8 @@ Bundle 'Shougo/unite.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'thinca/vim-quickrun'
 Bundle 'thinca/vim-ref'
+Bundle 'mattn/vimplenote-vim'
+Bundle 'mattn/webapi-vim'
 
 " Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
