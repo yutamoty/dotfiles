@@ -130,3 +130,9 @@ set fileformats=unix,dos,mac
 if exists('&ambiwidth')
   set ambiwidth=double
 endif
+
+" .vimrc.local があったら読み込む
+if filereadable(expand('~/.vimrc.local'))
+  source ~/.vimrc.local
+endif
+
