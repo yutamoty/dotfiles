@@ -1,0 +1,441 @@
+echo "Loading..."
+
+" Options
+"======================================================================
+" :[tab]open コマンドで補完する候補と順番
+set complete=tls
+
+" コマンド履歴保存件数 
+set history=1000
+
+" ブラウザタイトルの変更
+set titlestring=Firefox
+
+" GUI
+set gui=none
+
+" スクロールバーを消す
+set noscrollbars=true
+
+" /,? 検索結果をハイライト
+set hlsearch
+
+" ヒントの文字列をアルファベットに
+set hintchars=hjklasdfgyuiopqwertnmzxcvb
+
+" リンクのURIをコマンドラインに表示
+set showstatuslinks=2
+
+" ページロード時にテキストボックスにフォーカスするのを防ぐ
+set focuscontent
+
+" 表示する履歴の件数を設定する(デフォルトは100)
+set messages=500
+
+" verboseレベルを設定し，全てのechoerr/echomsgの履歴を見られるようにする(デフォルトは0)
+set verbose=15
+
+" ビープ音を消す
+"set nobeep
+set visualbell
+highlight Bell display:none
+
+" Gmail/LDR/Fastladder/はてブでは新規タブをバックグラウンドで開く
+" autocmd LocationChange '^(?!https?://(mail\.google\.com/(mail|a)/|(reader\.livedoor|fastladder)\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide))))' :set! browser.tabs.loadDivertedInBackground=true
+" autocmd LocationChange '^https?://(mail\.google\.com/(mail|a)/|(reader\.livedoor|fastladder)\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide)))' :set! browser.tabs.loadDivertedInBackground=false
+
+"色設定
+colorscheme indigo
+"colorscheme vimwhite
+"colorscheme sweets
+
+" ex mode時IMEをOFF
+style -name commandline-ime chrome://* #liberator-commandline-command input { ime-mode: inactive; }
+
+" perfs.js
+" ======================================================================
+
+" refcontrol
+set! refcontrol.actions="@DEFAULT=@NORMAL ameba.jp= dtiblog.com=@FORGE fc2.com= image.itmedia.co.jp=@FORGE img.itmedia.co.jp=@FORGE minkch.com=@NORMAL momi7.momi3.net=@FORGE www.b-idol.com=@FORGE xyzzz.blog.shinobi.jp=@FORGE"
+
+" IPv6 無効化
+set! network.dns.disableIPv6=true
+
+" Awesomebarの補完対象にBookmarkletを含める&件数を変更
+set! browser.urlbar.filter.javascript=false
+set! browser.urlbar.maxRichResults=50
+
+" undo の補完数を指定する
+set! browser.sessionstore.max_tabs_undo=50
+
+" 画像独自のカラープロファイルを表示
+" set! gfx.color_management.mode=1
+
+" 拡張機能インストールの際の待ち時間
+set! security.dialog_enable_delay=0
+
+" ポップアップ許可数を拡張 cf.http://la.ma.la/blog/diary_200611171115.htm
+set! dom.popup_maximum=9999
+
+" タブをバックグラウンドで開く
+set! browser.tabs.loadDivertedInBackground=true
+
+" 高速な Back/Forward 機能 (bfcache) 無効化
+set! browser.sessionhistory.max_total_viewers=0
+
+" プラグインインストール要求 無効化
+set! plugins.hide_infobar_for_missing_plugin=true
+
+" Mappings
+" ======================================================================
+" undo一覧から開く
+nnoremap U :undo<Space>
+
+" C-r でブラウザ再起動
+nnoremap <C-r> :restart<CR>
+
+" 上のディレクトリに移動
+nnoremap <BS> gu
+nnoremap <C-BS> gU
+
+" j/k でのスクロール幅を1行から5行に変更
+nnoremap j 5j
+nnoremap k 5k
+
+" J/K をC-d/u互換に
+nnoremap J <C-d>
+nnoremap K <C-u>
+
+" h/l でタブ移動
+nnoremap h <C-p>
+nnoremap l <C-n>
+
+" C-h/l でタブ位置変更
+nnoremap <C-h> :tabmove! -1<CR><esc>
+nnoremap <C-l> :tabmove! +1<CR><esc>
+
+" Alt+↑/↓でメニューの表示/非表示
+nnoremap <A-Down> :set gui=menu,navigation<CR><esc>
+nnoremap <A-Up> :set gui=nomenu,nonavigation<CR><esc>
+
+" . でbuffer
+nnoremap . :buffer<Space>
+
+" URL中の数字を++/--
+nnoremap ++ <C-a>
+nnoremap -- <C-x>
+
+" ! でページのCSSをon/off
+nnoremap ! :set invum<CR>
+
+" ex modeでC-jを無効化
+cnoremap <C-j> <Nop>
+
+" qmark
+qmark r http://reader.livedoor.com/reader/
+qmark F http://fastladder.com/reader/
+qmark p https://www.passpack.com/online/
+qmark f http://www.flickr.com/
+qmark D http://del.icio.us/yutamoty/
+qmark d http://d.hatena.ne.jp/yutamoty/
+qmark b http://b.hatena.ne.jp/yutamoty/
+qmark m https://mail.google.com/mail/
+qmark c https://www.google.com/calendar/render
+qmark t http://twitter.com/
+qmark T http://yutamoty.tumblr.com/
+qmark x chrome://browser/content/browser.xul 
+
+" bmark
+silent bmark -title="google" -tags=keyword -keyword=g http://www.google.co.jp/search?q=%s
+silent bmark -title="wikipedia" -tags=keyword -keyword=w http://ja.wikipedia.org/w/index.php?title=%u7279%u5225%3ASearch&search=%s
+silent bmark -title="ニコニコ動画" -tags=keyword -keyword=nico http://www.nicovideo.jp/search?ref=&s=%s
+silent bmark -title="youtube" -tags=keyword -keyword=y http://www.youtube.com/results?search_query=%s
+silent bmark -title="twitter" -tags=keyword -keyword=t https://twitter.com/%s
+silent bmark -title="はてなブックマーク" -tags=keyword -keyword=hb http://b.hatena.ne.jp/%s
+silent bmark -title="はてなダイアリー" -tags=keyword -keyword=hd http://d.hatena.ne.jp/%s
+silent bmark -title="Amazon.co.jp" -tags=keyword -keyword=a http://www.amazon.co.jp/s/ref=nb_sb_noss?__mk_ja_JP=%83J%83%5E%83J%83i&url=search-alias%3Daps&field-keywords=%s
+silent bmark -title="NAVER画像検索" -tags=keyword -keyword=ni http://search.naver.jp/image?sm=top_hty&q=%s
+silent bmark -title="google nyaatorrents" -tags=keyword -keyword=nya http://www.google.com/search?q=site%3Anyaatorrents.org+%s
+silent bmark -title="google hotfile" -tags=keyword -keyword=ghot http://www.google.com/search?q=site:megaupload.com+OR+site%3Ahotfile.com+OR+site%3Arapidshare.com+%s
+silent bmark -title="facebook linter" -tags=keyword -keyword=fbl https://developers.facebook.com/tools/debug?q=%s
+silent bmark -title="yahoo!検索 realtime" -tags=keyword -keyword=rt http://realtime.search.yahoo.co.jp/search?p=%s&ei=UTF-8
+
+" command!
+command! lr :open javascript:location.href='http://reader.livedoor.com/subscribe/'+location.href
+command! fr :open javascript:location.href='http://fastladder.com/subscribe/'+location.href
+command! rl :open javascript:(function(){ISRIL_H='9e84';ISRIL_SCRIPT=document.createElement('SCRIPT');ISRIL_SCRIPT.type='text/javascript';ISRIL_SCRIPT.src='http://readitlaterlist.com/b/r.js';document.getElementsByTagName('head')[0].appendChild(ISRIL_SCRIPT)})();
+
+" autocmd VimperatorEnter .* <args> を lazy コマンドとして登録
+command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
+
+" Plugins
+" ======================================================================
+" plugin_loader.js
+let g:plugin_loader_roots = "~/Dropbox/vimperator/vimperator/vimpr-vimperator-plugins/ ~/vimperator/vimpr-vimperator-plugins"
+let g:plugin_loader_plugins = "_libly,appendAnchor,auto_reload,copy,direct_bookmark,feedSomeKeys_3,gmperator,hint-tombloo-mod,sbmcommentsviewer,tombloo,walk-input,stella,opener,bitly,auto_source,loginManager,statusline-toolbar,ldrize_cooperation,uaSwitch,migemo_completion,readitlater,proxy"
+
+" statusline-toolbar.js
+" lazy set statuslinetoolbars=identity-box,feed-button,greasemonkey-tbb,firebug-button,showip_status_text
+lazy set statuslinetoolbars=identity-box,feed-button,greasemonkey-tbb,showip_status_text
+
+" appendAnchor.js
+let g:auto_append_anchor = "true"
+let g:auto_append_anchor_once = "true"
+
+" sbmcommentsviewer.js
+let g:def_sbm_format = "timestamp,id,tags,comment"
+" let g:def_sbms = "hdl"
+let g:def_sbms = "h"
+nnoremap b :echo ":viewSBMComments"<CR>:viewSBMComments<CR>
+
+" direct_bookmark.js
+let g:direct_sbm_use_services_by_tag = "h"
+let g:direct_sbm_use_services_by_post = "h"
+let g:direct_sbm_is_normalize = "false"
+let g:direct_sbm_is_use_migemo = "true"
+let g:direct_sbm_echo_type = "none"
+nnoremap B :bentry<CR>
+nnoremap a :sbm<Space>
+nnoremap ,a :btags<CR>
+lazy :btags
+
+"" delicious
+nnoremap A :sbm -s d<CR>
+
+" hatenabookmark.js
+nnoremap s :hbtab<Space>
+nnoremap S :hbtab<Space>
+js <<EOM
+liberator.globalVariables.hBookmark_shortcuts = {
+    hintsAdd     : 'A',
+    hintsComment : ' ',
+    add          : ['C'],
+    comment      : ['c'],
+};
+if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
+EOM
+
+" ldrize_cooperation.js
+let g:ldrc_captureMappings = "['j','k','p','o','?']"
+"let g:ldrc_intelligence_bind = "true"
+"let g:ldrc_skip = "0"
+nnoremap Q :toggleldrc<CR>
+
+" heuristic-search.js
+nnoremap ` :hsearch<Space>
+
+" copy.js
+map c :copy<Space>
+js <<EOM
+liberator.globalVariables.copy_templates = [
+  { label: 'titleAndURL',    value: '%TITLE% %URL%' },
+  { label: 'title',          value: '%TITLE%' },
+  { label: 'url',            value: '%URL%' },
+  { label: 'markdown',       value: '[%TITLE%](%URL% "%TITLE%")' },
+  { label: 'markdownsel',    value: '[%SEL%](%URL% "%TITLE%")' },
+  { label: 'htmlblockquote', value: '<blockquote cite="%URL%" title="%TITLE%">%HTMLSEL%</blockquote>' },
+  { label: 'hateda',         value: '[%URL%:title=%TITLE%]' },
+  { label: 'goo.gl', value: 'get goo.gl short url',
+      custom: function() {
+          var ret = "";
+          var xhr = util.httpGet(
+              "http://ggl-shortener.appspot.com/?url=" + encodeURIComponent(buffer.URL));
+          if (xhr && xhr.status === 200) {
+              ret = JSON.parse(xhr.responseText).short_url;
+          }
+          return ret;
+      }
+  }
+];
+EOM
+
+" feedSomeKeys_3.js
+" Gmail
+lazy fmaps -u='^https?://mail\.google\.com/(mail|a)/' c j k n p o u e x s r a # [ ] z ? gi gs gt gd ga gc
+" Tumblr (use: tombloo.xpi, dashboard+tombloo.user.js, reblogcommand.user.js, playontumblr.user.js)
+lazy fmaps -u='^http://[^\./]*\.tumblr\.com/' i,tj e,tk q
+" LDR/Fastladder (use: tombloo.xpi, ldr+tombloo.user.js, ldr_relative_rate.user.js)
+lazy fmaps -u='^http://(reader\.livedoor|fastladder)\.com/reader/' j k s a p v c z Z b,i B,b e r < > o,vj J,<Space> K,<S-Space> q w g u
+lazy fmaps -u='^http://(reader\.livedoor|fastladder)\.com/reader/' -events=vkeypress i,Tj T
+" iview
+lazy fmaps -u='^chrome://iviewfx/content/iview\.html' j k s a z o i,tj p
+" はてブ
+lazy fmaps -u='^http://b\.hatena\.ne\.jp/(?!(entry|articles|guide))' j k o,oj e a,b
+
+" account_switcher.js
+"noremap ,g :account<Space>
+
+" loginManager.js
+noremap ,g :login<Space>
+
+" ldr_unread_counter.js
+let livedoor_id = "yutamoty"
+
+" encodingSwitcher.js
+nnoremap es :set encoding=Shift_JIS<CR>
+nnoremap ec :set encoding=EUC-JP<CR>
+nnoremap eu :set encoding=UTF-8<CR>
+nnoremap ei :set encodeing=ISO-2022-JP<CR>
+
+" uaSwitchLite.js
+javascript <<EOM
+liberator.globalVariables.useragent_list = [
+{
+  description: 'Internet Explorer 7 (Windows Vista)',
+  useragent: 'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)',
+  appname: 'Microsoft Internet Explorer',
+  appversion: '4.0 (compatible; MSIE 7.0; Windows NT 6.0)',
+  platform: 'Win32',
+  vendor: '',
+  vendorSub: ''
+}, {
+  description: 'Netscape 4.8 (Windows Vista)',
+  useragent: 'Mozilla/4.8 [en] (Windows NT 6.0; U)',
+  appname: 'Netscape',
+  appversion: '4.8 [en] (Windows NT 6.0; U)',
+  platform: 'Win32',
+  vendor: '',
+  vendorSub: ''
+}, {
+  description: 'Opera 9.25 (Windows Vista)',
+  useragent: 'Opera/9.25 (Windows NT 6.0; U; en)',
+  appname: 'Opera',
+  appversion: '9.25 (Windows NT 6.0; U; en)',
+  platform: 'Win32',
+}, {
+  description: 'iPhone',
+  useragent: 'Mozilla/5.0 (iPhone; U; CPU iPhone OS 3_0 like Mac OS X; ja-jp) AppleWebKit/528.11(KHTML, like Gecko) Version/3.1.1 Mobile/7A238j Safari/525.20',
+}, {
+  description: 'PSP',
+  useragent: 'Mozilla/4.0 (PSP (PlayStation Portable); 2.00)',
+}];
+EOM
+
+" localkeymode.js
+
+" proxy.js
+javascript <<EOM
+liberator.globalVariables.proxy_settings = [
+   {
+      conf_name: 'disable',
+      conf_usage: 'direct connection',
+      settings: [
+      {
+         label: 'type',
+         param: 0
+      }
+      ]
+   },
+   {
+      conf_name: 'squid',
+      conf_usage: 'use squid cache proxy',
+      settings: [
+      {
+         label: 'type',
+         param: 1
+      },
+      {
+         label: 'http',
+         param: 'lql.be'
+      },
+      {
+         label: 'http_port',
+         param: 8080
+      }
+      ]
+   }
+];
+EOM
+
+" stella.js
+js <<EOM
+function addLocalMappings(buffer, maps) {
+  maps.forEach(
+    function (map) {
+      let [cmd, action, extra] = map;
+      let actionFunc = action;
+      extra || (extra = {});
+
+      if (typeof action == "string") {
+        if (action.charAt(0) == ':')
+          actionFunc = extra.open ? function () commandline.open("", action, modes.EX)
+                                  : function () liberator.execute(action);
+        else
+          actionFunc = function () events.feedkeys(action, extra.noremap, true);
+      }
+      extra.matchingUrls = buffer;
+      mappings.addUserMap(
+        [modes.NORMAL],
+        [cmd],
+        "Local mapping for " + buffer,
+        actionFunc,
+        extra
+      );
+    }
+  );
+}
+addLocalMappings(
+  /^(http:\/\/(es|www).nicovideo.jp\/(watch|playlist\/mylist)|http:\/\/(jp|www)\.youtube\.com\/watch|http:\/\/(www\.)?vimeo\.com\/(channels\/(hd)?#)?\d+)/,
+  [
+    ['<C-g>', ':pageinfo S', ],
+    ['p', ':stplay', ],
+    ['m', ':stmute', ],
+    [',c', ':stcomment', ],
+    ['zz', ':stlarge', ],
+    ['r', ':strepeat', ],
+	['w', ':stfetch', ],
+    ['+', ':stvolume! 10', ],
+    ['-', ':stvolume! -10', ],
+    ['<', ':stseek! -10', ],
+    ['>', ':stseek! 10', ],
+    ['v', ':stvolume ', {open: true}],
+    ['V', ':stvolume! ', {open: true}],
+    ['o', ':strelations ', {open: true}],
+    ['O', ':strelations! ', {open: true}],
+  ]
+);
+EOM
+
+" x-hint.js
+nnoremap -u='^http://(reader\.livedoor|fastladder)\.com/reader/' r :xh r //*[contains(concat(" ",normalize-space(@class)," "), " hilight ")]//*[@class="item_body"]//img<CR>
+nnoremap -u='^http://(reader\.livedoor|fastladder)\.com/reader/' b :xh c //*[contains(concat(" ",normalize-space(@class)," "), " hilight ")]//*[@class="item_info"]/a[1]<CR>
+nnoremap -u='^http://www\.tumblr\.com/' f :xh o //a[not(@class="tumblr_blog")]<CR>
+nnoremap -u='^http://www\.tumblr\.com/' F :xh t //a[not(@class="tumblr_blog")]<CR>
+
+" javascript
+" ======================================================================
+
+" yourfilehost cookie削除
+" cf.http://anond.hatelabo.jp/20100108213648
+javascript <<EOM
+commands.addUserCommand(
+  ['removeCookieOfYourfile'],
+  'removeCookieOfYourfile',
+  function() {
+    liberator.execute('cookiemanager remove yourfilehostdatabase.com/');
+    liberator.execute('cookiemanager remove yourfilehost.com/');
+    liberator.execute('cookiemanager remove yourlifehost.jp/');
+        }
+);
+EOM
+
+" Greasemonkey 0.9.13 patch
+" cf.http://d.hatena.ne.jp/littlefolk/20110625/p1
+js <<EOM
+autocommands.add(
+  'VimperatorEnter', '.*',
+  function () {
+    let Cc = Components.classes['@greasemonkey.mozdev.org/greasemonkey-service;1'];
+    if (Cc) {
+      Cc = Cc.getService().wrappedJSObject;
+      if (Cc.injectScripts.toSource().search('sharedWindow') == -1) {
+        Cc.injectScripts = liberator.eval(
+          Cc.injectScripts.toSource()
+            .replace(/(?=(?:var|let) (?:firebugConsole))/,'var sharedObject = {};')
+            .replace(/(?=var requires)/, 'sandbox.sharedObject = sharedObject;')
+            .replace(/(?=}$)/, 'return sharedObject;'),
+        Cc.injectScripts);
+      };
+    };
+  });
+EOM
