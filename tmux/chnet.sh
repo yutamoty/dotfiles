@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-ping -c 1 8.8.8.8 > /dev/null
+ping -c 1 -t 1 8.8.8.8 > /dev/null
 
 if [ $? = 0 ];
 then
-	echo "○"
+	echo "#[fg=green,bold]●"
 else
-	echo "●"
+	echo "#[fg=red,bold]●"
 fi
