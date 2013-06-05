@@ -1,5 +1,69 @@
 echo "Loading..."
 
+" prefs
+" ======================================================================
+" ダウンロードマネージャを表示しない
+set! browser.download.manager.showWhenStarting=false
+
+" 最後のタブを閉じたときに Firefox を終了しない
+set! browser.tabs.closeWindowWithLastTab=false
+
+"ページのアクセスキーを無効化
+set! ui.key.contentAccess=0
+
+" ポップアップ許可数を拡張 cf.http://la.ma.la/blog/diary_200611171115.htm
+set! dom.popup_maximum=9999
+
+" Gmail/LDR/はてブでは新規タブをバックグラウンドで開く
+autocmd LocationChange '^(?!https?://(mail\.google\.com/(mail|a)/|reader\.livedoor\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide))))' :set! browser.tabs.loadDivertedInBackground=false
+autocmd LocationChange '^https?://(mail\.google\.com/(mail|a)/|reader\.livedoor\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide)))' :set! browser.tabs.loadDivertedInBackground=true
+"set! browser.tabs.loadDivertedInBackground=true
+
+" RefControl
+set! refcontrol.actions=@DEFAULT=@NORMAL\ ameba.jp=\ dtiblog.com=@FORGE\ fc2.com=\ image.itmedia.co.jp=@FORGE\ img.itmedia.co.jp=@FORGE\ minkch.com=@NORMAL\ momi7.momi3.net=@FORGE\ pixiv.net=@3RDPARTY:@FORGE\ www.b-idol.com=@FORGE\ xyzzz.blog.shinobi.jp=@FORGE
+
+" IPv6 無効化
+set! network.dns.disableIPv6=true
+
+" Awesomebarの補完対象にBookmarkletを含める&件数を変更
+set! browser.urlbar.filter.javascript=false
+set! browser.urlbar.maxRichResults=50
+
+" undo の補完数を指定する
+set! browser.sessionstore.max_tabs_undo=50
+
+" 画像独自のカラープロファイルを表示
+" set! gfx.color_management.mode=1
+
+" 拡張機能インストールの際の待ち時間
+set! security.dialog_enable_delay=0
+
+" ポップアップ許可数を拡張 cf.http://la.ma.la/blog/diary_200611171115.htm
+set! dom.popup_maximum=9999
+
+" タブをバックグラウンドで開く
+set! browser.tabs.loadDivertedInBackground=true
+
+" プラグインインストール要求 無効化
+set! plugins.hide_infobar_for_missing_plugin=true
+
+" アドオンチェック無効化
+set! extensions.checkCompatibility.12.0=false
+set! extensions.checkCompatibility.13.0=false
+set! extensions.checkCompatibility.14.0=false
+set! extensions.checkCompatibility.15.0=false
+set! extensions.checkCompatibility.16.0=false
+set! extensions.checkCompatibility.17.0=false
+set! extensions.checkCompatibility.18.0=false
+set! extensions.checkCompatibility.19.0=false
+set! extensions.checkCompatibility.20.0=false
+set! extensions.checkCompatibility.21.0=false
+
+"色設定
+"colorscheme indigo
+"colorscheme vimwhite
+"colorscheme sweets
+
 " Options
 "======================================================================
 " :[tab]open コマンドで補完する候補と順番
@@ -15,7 +79,7 @@ set titlestring=Firefox
 set gui=none
 
 " スクロールバーを消す
-set noscrollbars=true
+" set noscrollbars=true
 
 " /,? 検索結果をハイライト
 set hlsearch
@@ -40,52 +104,6 @@ set verbose=15
 set visualbell
 highlight Bell display:none
 
-" Gmail/LDR/Fastladder/はてブでは新規タブをバックグラウンドで開く
-" autocmd LocationChange '^(?!https?://(mail\.google\.com/(mail|a)/|(reader\.livedoor|fastladder)\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide))))' :set! browser.tabs.loadDivertedInBackground=true
-" autocmd LocationChange '^https?://(mail\.google\.com/(mail|a)/|(reader\.livedoor|fastladder)\.com/reader/|b\.hatena\.ne\.jp/(?!(entry|articles|guide)))' :set! browser.tabs.loadDivertedInBackground=false
-
-"色設定
-colorscheme indigo
-"colorscheme vimwhite
-"colorscheme sweets
-
-" ex mode時IMEをOFF
-style -name commandline-ime chrome://* #liberator-commandline-command input { ime-mode: inactive; }
-
-" perfs.js
-" ======================================================================
-
-" refcontrol
-set! refcontrol.actions="@DEFAULT=@NORMAL ameba.jp= dtiblog.com=@FORGE fc2.com= image.itmedia.co.jp=@FORGE img.itmedia.co.jp=@FORGE minkch.com=@NORMAL momi7.momi3.net=@FORGE www.b-idol.com=@FORGE xyzzz.blog.shinobi.jp=@FORGE"
-
-" IPv6 無効化
-set! network.dns.disableIPv6=true
-
-" Awesomebarの補完対象にBookmarkletを含める&件数を変更
-set! browser.urlbar.filter.javascript=false
-set! browser.urlbar.maxRichResults=50
-
-" undo の補完数を指定する
-set! browser.sessionstore.max_tabs_undo=50
-
-" 画像独自のカラープロファイルを表示
-" set! gfx.color_management.mode=1
-
-" 拡張機能インストールの際の待ち時間
-set! security.dialog_enable_delay=0
-
-" ポップアップ許可数を拡張 cf.http://la.ma.la/blog/diary_200611171115.htm
-set! dom.popup_maximum=9999
-
-" タブをバックグラウンドで開く
-set! browser.tabs.loadDivertedInBackground=true
-
-" 高速な Back/Forward 機能 (bfcache) 無効化
-set! browser.sessionhistory.max_total_viewers=0
-
-" プラグインインストール要求 無効化
-set! plugins.hide_infobar_for_missing_plugin=true
-
 " Mappings
 " ======================================================================
 " undo一覧から開く
@@ -101,6 +119,8 @@ nnoremap <C-BS> gU
 " j/k でのスクロール幅を1行から5行に変更
 nnoremap j 5j
 nnoremap k 5k
+nnoremap <C-j> 3j
+nnoremap <C-k> 3k
 
 " J/K をC-d/u互換に
 nnoremap J <C-d>
@@ -119,7 +139,7 @@ nnoremap <A-Down> :set gui=menu,navigation<CR><esc>
 nnoremap <A-Up> :set gui=nomenu,nonavigation<CR><esc>
 
 " . でbuffer
-nnoremap . :buffer<Space>
+nnoremap . b
 
 " URL中の数字を++/--
 nnoremap ++ <C-a>
@@ -131,36 +151,9 @@ nnoremap ! :set invum<CR>
 " ex modeでC-jを無効化
 cnoremap <C-j> <Nop>
 
-" qmark
-qmark r http://reader.livedoor.com/reader/
-qmark F http://fastladder.com/reader/
-qmark p https://www.passpack.com/online/
-qmark f http://www.flickr.com/
-qmark D http://del.icio.us/yutamoty/
-qmark d http://d.hatena.ne.jp/yutamoty/
-qmark b http://b.hatena.ne.jp/yutamoty/
-qmark m https://mail.google.com/mail/
-qmark c https://www.google.com/calendar/render
-qmark t http://twitter.com/
-qmark T http://yutamoty.tumblr.com/
-qmark x chrome://browser/content/browser.xul 
-
-" bmark
-silent bmark -title="google" -tags=keyword -keyword=g http://www.google.co.jp/search?q=%s
-silent bmark -title="wikipedia" -tags=keyword -keyword=w http://ja.wikipedia.org/w/index.php?title=%u7279%u5225%3ASearch&search=%s
-silent bmark -title="ニコニコ動画" -tags=keyword -keyword=nico http://www.nicovideo.jp/search?ref=&s=%s
-silent bmark -title="youtube" -tags=keyword -keyword=y http://www.youtube.com/results?search_query=%s
-silent bmark -title="twitter" -tags=keyword -keyword=t https://twitter.com/%s
-silent bmark -title="はてなブックマーク" -tags=keyword -keyword=hb http://b.hatena.ne.jp/%s
-silent bmark -title="はてなダイアリー" -tags=keyword -keyword=hd http://d.hatena.ne.jp/%s
-silent bmark -title="Amazon.co.jp" -tags=keyword -keyword=a http://www.amazon.co.jp/s/ref=nb_sb_noss?__mk_ja_JP=%83J%83%5E%83J%83i&url=search-alias%3Daps&field-keywords=%s
-silent bmark -title="NAVER画像検索" -tags=keyword -keyword=ni http://search.naver.jp/image?sm=top_hty&q=%s
-silent bmark -title="google nyaatorrents" -tags=keyword -keyword=nya http://www.google.com/search?q=site%3Anyaatorrents.org+%s
-silent bmark -title="google hotfile" -tags=keyword -keyword=ghot http://www.google.com/search?q=site:megaupload.com+OR+site%3Ahotfile.com+OR+site%3Arapidshare.com+%s
-silent bmark -title="facebook linter" -tags=keyword -keyword=fbl https://developers.facebook.com/tools/debug?q=%s
-silent bmark -title="yahoo!検索 realtime" -tags=keyword -keyword=rt http://realtime.search.yahoo.co.jp/search?p=%s&ei=UTF-8
-
-" command!
+" command
+" ======================================================================
+" ブックマークレットを使用
 command! lr :open javascript:location.href='http://reader.livedoor.com/subscribe/'+location.href
 command! fr :open javascript:location.href='http://fastladder.com/subscribe/'+location.href
 command! rl :open javascript:(function(){ISRIL_H='9e84';ISRIL_SCRIPT=document.createElement('SCRIPT');ISRIL_SCRIPT.type='text/javascript';ISRIL_SCRIPT.src='http://readitlaterlist.com/b/r.js';document.getElementsByTagName('head')[0].appendChild(ISRIL_SCRIPT)})();
@@ -168,25 +161,45 @@ command! rl :open javascript:(function(){ISRIL_H='9e84';ISRIL_SCRIPT=document.cr
 " autocmd VimperatorEnter .* <args> を lazy コマンドとして登録
 command! -nargs=+ lazy autocmd VimperatorEnter .* <args>
 
+" カレンダーを表示
+command cal :js liberator.echo(<datepicker type="grid" xmlns={XUL}/>)
+
 " Plugins
 " ======================================================================
 " plugin_loader.js
-let g:plugin_loader_roots = "~/Dropbox/vimperator/vimperator/vimpr-vimperator-plugins/ ~/vimperator/vimpr-vimperator-plugins"
-let g:plugin_loader_plugins = "_libly,appendAnchor,auto_reload,copy,direct_bookmark,feedSomeKeys_3,gmperator,hint-tombloo-mod,sbmcommentsviewer,tombloo,walk-input,stella,opener,bitly,auto_source,loginManager,statusline-toolbar,ldrize_cooperation,uaSwitch,migemo_completion,readitlater,proxy"
+let g:plugin_loader_roots = "~/Dropbox/vimperator/vimperator/vimperator-plugins/ ~/vimperator/vimpr-vimperator-plugins"
+let g:plugin_loader_plugins = "_libly,account_switcher,appendAnchor,auto_reload,copy,direct_bookmark,feedSomeKeys_3,hatenaStar,multi_requester,pino,sbmcommentsviewer,tombloo,walk-input,stella,opener,bitly,x-hint,auto_source,reload-image,loginManager,statusline-toolbar,migemo_completion,hint-tombloo-mod,caret-hint,prevent-pseudo-domain,lo,liberator-overlay-ext,auto-bookmark,QB,hint-ext,commandBookmarklet,nicolist,pluginManager,usi"
 
-" statusline-toolbar.js
-" lazy set statuslinetoolbars=identity-box,feed-button,greasemonkey-tbb,firebug-button,showip_status_text
-lazy set statuslinetoolbars=identity-box,feed-button,greasemonkey-tbb,showip_status_text
+" nicolist.js
+nnoremap ,n :nicolist open<Space>
+
+" hint-ext.js
+let use_hints_ext_hinttags=1
+let use_hints_ext_extendedhinttags=1
+
+" liberator-overlay-ext.js
+js mappings.addUserMap([modes.COMMAND_LINE], ["<C-g>"], "", function () plugins.liberatorOverlayExt.toggleShowBackground());
+style -name liberator-overlay-ext chrome://* .liberator-overlay { opacity: .9; }
+
+" caret-hint.js
+let g:caret_hint_key = "i"
+let g:caret_hint_tail_key = "I"
+let g:caret_hint_select_key = "v"
+let g:caret_hint_select_tail_key = "V"
+let g:caret_hint_swap_key = "s"
 
 " appendAnchor.js
 let g:auto_append_anchor = "true"
 let g:auto_append_anchor_once = "true"
 
+" statusline-toolbar.js
+lazy set statuslinetoolbars=identity-box,feed-button,showip_status_text,lpt_lastpass-compact-btn,scriptish-button,downloads-indicator,firebug-button
+
 " sbmcommentsviewer.js
-let g:def_sbm_format = "timestamp,id,tags,comment"
-" let g:def_sbms = "hdl"
+let g:def_sbm_format = "id,tags,comment,timestamp"
 let g:def_sbms = "h"
-nnoremap b :echo ":viewSBMComments"<CR>:viewSBMComments<CR>
+noremap b :viewSBMComments<CR>
+color sbmcommentsviewer
 
 " direct_bookmark.js
 let g:direct_sbm_use_services_by_tag = "h"
@@ -199,7 +212,7 @@ nnoremap a :sbm<Space>
 nnoremap ,a :btags<CR>
 lazy :btags
 
-"" delicious
+" delicious.js
 nnoremap A :sbm -s d<CR>
 
 " hatenabookmark.js
@@ -207,13 +220,19 @@ nnoremap s :hbtab<Space>
 nnoremap S :hbtab<Space>
 js <<EOM
 liberator.globalVariables.hBookmark_shortcuts = {
-    hintsAdd     : 'A',
-    hintsComment : ' ',
+    hintsAdd     : 'a',
+    hintsComment : 'c',
     add          : ['C'],
     comment      : ['c'],
 };
 if (typeof hBookmark != 'undefined') liberator.loadScript('chrome://hatenabookmark/content/vimperator/plugin/hatenabookmark.js', {__proto__: this});
 EOM
+
+" multi_requester
+nnoremap ,m :mr<Space>
+nnoremap ma :mr alc<Space>
+nnoremap mt :mr googletrans-ja<Space>
+nnoremap mT :mr googletrans-ja<CR>
 
 " ldrize_cooperation.js
 let g:ldrc_captureMappings = "['j','k','p','o','?']"
@@ -225,7 +244,7 @@ nnoremap Q :toggleldrc<CR>
 nnoremap ` :hsearch<Space>
 
 " copy.js
-map c :copy<Space>
+nnoremap ,c :copy<Space>
 js <<EOM
 liberator.globalVariables.copy_templates = [
   { label: 'titleAndURL',    value: '%TITLE% %URL%' },
@@ -234,36 +253,8 @@ liberator.globalVariables.copy_templates = [
   { label: 'markdown',       value: '[%TITLE%](%URL% "%TITLE%")' },
   { label: 'markdownsel',    value: '[%SEL%](%URL% "%TITLE%")' },
   { label: 'htmlblockquote', value: '<blockquote cite="%URL%" title="%TITLE%">%HTMLSEL%</blockquote>' },
-  { label: 'hateda',         value: '[%URL%:title=%TITLE%]' },
-  { label: 'goo.gl', value: 'get goo.gl short url',
-      custom: function() {
-          var ret = "";
-          var xhr = util.httpGet(
-              "http://ggl-shortener.appspot.com/?url=" + encodeURIComponent(buffer.URL));
-          if (xhr && xhr.status === 200) {
-              ret = JSON.parse(xhr.responseText).short_url;
-          }
-          return ret;
-      }
-  }
 ];
 EOM
-
-" feedSomeKeys_3.js
-" Gmail
-lazy fmaps -u='^https?://mail\.google\.com/(mail|a)/' c j k n p o u e x s r a # [ ] z ? gi gs gt gd ga gc
-" Tumblr (use: tombloo.xpi, dashboard+tombloo.user.js, reblogcommand.user.js, playontumblr.user.js)
-lazy fmaps -u='^http://[^\./]*\.tumblr\.com/' i,tj e,tk q
-" LDR/Fastladder (use: tombloo.xpi, ldr+tombloo.user.js, ldr_relative_rate.user.js)
-lazy fmaps -u='^http://(reader\.livedoor|fastladder)\.com/reader/' j k s a p v c z Z b,i B,b e r < > o,vj J,<Space> K,<S-Space> q w g u
-lazy fmaps -u='^http://(reader\.livedoor|fastladder)\.com/reader/' -events=vkeypress i,Tj T
-" iview
-lazy fmaps -u='^chrome://iviewfx/content/iview\.html' j k s a z o i,tj p
-" はてブ
-lazy fmaps -u='^http://b\.hatena\.ne\.jp/(?!(entry|articles|guide))' j k o,oj e a,b
-
-" account_switcher.js
-"noremap ,g :account<Space>
 
 " loginManager.js
 noremap ,g :login<Space>
@@ -377,21 +368,21 @@ function addLocalMappings(buffer, maps) {
 addLocalMappings(
   /^(http:\/\/(es|www).nicovideo.jp\/(watch|playlist\/mylist)|http:\/\/(jp|www)\.youtube\.com\/watch|http:\/\/(www\.)?vimeo\.com\/(channels\/(hd)?#)?\d+)/,
   [
-    ['<C-g>', ':pageinfo S', ],
-    ['p', ':stplay', ],
-    ['m', ':stmute', ],
-    [',c', ':stcomment', ],
-    ['zz', ':stlarge', ],
-    ['r', ':strepeat', ],
-	['w', ':stfetch', ],
-    ['+', ':stvolume! 10', ],
-    ['-', ':stvolume! -10', ],
-    ['<', ':stseek! -10', ],
-    ['>', ':stseek! 10', ],
-    ['v', ':stvolume ', {open: true}],
-    ['V', ':stvolume! ', {open: true}],
-    ['o', ':strelations ', {open: true}],
-    ['O', ':strelations! ', {open: true}],
+    ['<C-g>', ':pageinfo S',      ],
+    ['p',     ':stplay',          ],
+    ['m',     ':stmute',          ],
+    [',c',    ':stcomment',       ],
+    ['zz',    ':stlarge',         ],
+    ['w',     ':stfetch',         ],
+    ['r',     ':strepeat',        ],
+    ['+',     ':stvolume! 10',    ],
+    ['-',     ':stvolume! -10',   ],
+    ['<',     ':stseek! -10',     ],
+    ['>',     ':stseek! 10',      ],
+    ['v',     ':stvolume ',       {open: true}],
+    ['V',     ':stvolume! ',      {open: true}],
+    ['o',     ':strelations ',    {open: true}],
+    ['O',     ':strelations! ',   {open: true}],
   ]
 );
 EOM
@@ -402,40 +393,167 @@ nnoremap -u='^http://(reader\.livedoor|fastladder)\.com/reader/' b :xh c //*[con
 nnoremap -u='^http://www\.tumblr\.com/' f :xh o //a[not(@class="tumblr_blog")]<CR>
 nnoremap -u='^http://www\.tumblr\.com/' F :xh t //a[not(@class="tumblr_blog")]<CR>
 
+" hint-tombloo-mod
+let g:hint_tombloo_key = 'r'
+
+" ウェブサービス最適化
+" feedSomeKeys_3.js, tombloo.js, x-hint.js
+" Gmail
+lazy fmaps -u='^https?://mail\.google\.com/(mail|a)/' c j k n p o u e x s r a # [ ] z ? gi gs gt gd ga gc
+" はてブ
+lazy fmaps -u='^http://b\.hatena\.ne\.jp/(?!(entry|articles|guide))' j k o,oj e a,b
+" Tumblr
+lazy fmaps -e=vkeydown -u='^http://www\.tumblr\.com/' j k r,t q p n L,l<CR>
+" LDR/Fastladder 
+lazy fmaps -u='^http://reader\.livedoor\.com/reader/' j k s a p v z <S-z> ,r,r < > o,vj J,<Space> K,<S-Space> q w g
+nnoremap -u='^http://reader\.livedoor\.com/reader/' b :tombloo Link - LDR<CR>
+nnoremap -u='^http://reader\.livedoor\.com/reader/' B :tombloo! Link - LDR<CR>
+nnoremap -u='^http://reader\.livedoor\.com/reader/' e :tombloo ReBlog - LDR<CR>
+nnoremap -u='^http://reader\.livedoor\.com/reader/' r :xh r //*[contains(concat(" ",normalize-space(@class)," "), " hilight ")]//*[@class="item_body"]//img<CR>
+nnoremap -u='^http://reader\.livedoor\.com/reader/' c :xh c //*[contains(concat(" ",normalize-space(@class)," "), " hilight ")]//*[@class="item_info"]/a[1]<CR>
+" Remember the Milk
+lazy fmaps -u='https?://www\.rememberthemilk\.com/home/' j k m i c t ? d F,f G,g S,s L,l Y,y H,h M,m <Del> <C-S-Left> <C-S-Right>
+
+" usi.js
+noremap ,t :usi task<Space>
+
 " javascript
 " ======================================================================
-
-" yourfilehost cookie削除
-" cf.http://anond.hatelabo.jp/20100108213648
-javascript <<EOM
-commands.addUserCommand(
-  ['removeCookieOfYourfile'],
-  'removeCookieOfYourfile',
-  function() {
-    liberator.execute('cookiemanager remove yourfilehostdatabase.com/');
-    liberator.execute('cookiemanager remove yourfilehost.com/');
-    liberator.execute('cookiemanager remove yourlifehost.jp/');
-        }
-);
-EOM
-
-" Greasemonkey 0.9.13 patch
-" cf.http://d.hatena.ne.jp/littlefolk/20110625/p1
+" bangをトグル
+" cf.http://d.hatena.ne.jp/eagletmt/20100506/1273141081
 js <<EOM
-autocommands.add(
-  'VimperatorEnter', '.*',
-  function () {
-    let Cc = Components.classes['@greasemonkey.mozdev.org/greasemonkey-service;1'];
-    if (Cc) {
-      Cc = Cc.getService().wrappedJSObject;
-      if (Cc.injectScripts.toSource().search('sharedWindow') == -1) {
-        Cc.injectScripts = liberator.eval(
-          Cc.injectScripts.toSource()
-            .replace(/(?=(?:var|let) (?:firebugConsole))/,'var sharedObject = {};')
-            .replace(/(?=var requires)/, 'sandbox.sharedObject = sharedObject;')
-            .replace(/(?=}$)/, 'return sharedObject;'),
-        Cc.injectScripts);
-      };
-    };
-  });
+mappings.addUserMap(
+  [modes.COMMAND_LINE],
+  ['<C-x>'],
+  'toggle bang',
+  function() {
+    let [,cmd,bang,args] = commands.parseCommand(commandline.command);
+    bang = bang ? '' : '!';
+    commandline.command = cmd + bang + ' ' + args;
+});
 EOM
+
+" Firefoxのタブを開く位置をデフォで現在のタブの右隣にする(※ gBrowser.addTabの改造)
+" cf.http://d.hatena.ne.jp/wlt/20110112/1294859530
+js <<EOM
+gBrowser.addTab = liberator.eval(
+    '(' +
+    gBrowser.addTab.toSource()
+            .replace(/var aRelatedToCurrent;/, 'var aRelatedToCurrent = true;')
+            .replace(/aRelatedToCurrent = params\.relatedToCurrent;/, 'aRelatedToCurrent = params.relatedToCurrent === undefined ? true : params.relatedToCurrent;') +
+    ')',
+    gBrowser.addTab);
+EOM
+
+" autocmd 駆動時のエコーをやめる
+" cf.http://vimperator.g.hatena.ne.jp/nokturnalmortum/20110616/1308191737
+js <<EOM
+let (original = liberator.echomsg)
+  liberator.echomsg = function (msg) {
+    const REAC = RegExp('@chrome://liberator/content/autocommands\\.js:\\d+');
+    if (Error().stack.split(/\n/).some(RegExp.prototype.test.bind(REAC)) && /Executing .* Auto commands for .*/.test(msg))
+      liberator.log(msg);
+    else
+      original.apply(liberator, arguments);
+  };
+EOM
+
+" Firebug
+" cf.http://d.hatena.ne.jp/zentoo/20111009/1318148524
+" firebug inspect mode hint
+js <<EOM
+hints.addMode('n', 'firebug inspect hint', function(elem){
+    Firebug.toggleBar(true);
+    Firebug.chrome.select(elem);
+}, function() '//*');
+EOM
+" contenteditable hint
+js <<EOM
+hints.addMode('e', 'contenteditable hint', function(elem){
+    elem.setAttribute("contenteditable", true);
+    elem.focus();
+}, function() '//*');
+EOM
+
+" qmarks
+" ======================================================================
+silent qmark r http://reader.livedoor.com/reader/
+silent qmark F http://fastladder.com/reader/
+silent qmark D http://del.icio.us/yutamoty/
+silent qmark b http://b.hatena.ne.jp/yutamoty/bookmark
+silent qmark g https://mail.google.com/
+silent qmark c https://www.google.com/calendar/
+silent qmark x chrome://browser/content/browser.xul 
+silent qmark p pp 
+silent qmark l al 
+silent qmark f af 
+silent qmark t at 
+silent qmark r recss
+
+" bmark
+" ======================================================================
+silent bmark -title="google" -tags=keyword -keyword=g http://www.google.co.jp/search?q=%s
+silent bmark -title="wikipedia" -tags=keyword -keyword=w http://ja.wikipedia.org/w/index.php?title=%u7279%u5225%3ASearch&search=%s
+silent bmark -title="ニコニコ動画" -tags=keyword -keyword=nico http://www.nicovideo.jp/search?ref=&s=%s
+silent bmark -title="youtube" -tags=keyword -keyword=y http://www.youtube.com/results?search_query=%s
+silent bmark -title="twitter" -tags=keyword -keyword=t https://twitter.com/%s
+silent bmark -title="はてなブックマーク" -tags=keyword -keyword=hb http://b.hatena.ne.jp/yutamoty/search?q=%s
+silent bmark -title="はてなダイアリー" -tags=keyword -keyword=hd http://d.hatena.ne.jp/%s
+silent bmark -title="Amazon.co.jp" -tags=keyword -keyword=a http://www.amazon.co.jp/s/ref=nb_sb_noss?__mk_ja_JP=%83J%83%5E%83J%83i&url=search-alias%3Daps&field-keywords=%s
+silent bmark -title="NAVER画像検索" -tags=keyword -keyword=ni http://search.naver.jp/image?sm=top_hty&q=%s
+silent bmark -title="google nyaatorrents" -tags=keyword -keyword=nya http://www.google.com/search?q=site%3Anyaatorrents.org+%s
+silent bmark -title="google hotfile" -tags=keyword -keyword=ghot http://www.google.com/search?q=site:megaupload.com+OR+site%3Ahotfile.com+OR+site%3Arapidshare.com+%s
+silent bmark -title="facebook linter" -tags=keyword -keyword=fbl https://developers.facebook.com/tools/debug?q=%s
+silent bmark -title="yahoo!検索 realtime" -tags=keyword -keyword=rt http://realtime.search.yahoo.co.jp/search?p=%s&ei=UTF-8
+
+" style
+" ======================================================================
+color hint
+style -name liberator-statusline chrome://* #liberator-statusline, #liberator-commandline { -moz-box-align: center; }
+
+" toolbarbutton
+" style -name liberator-customize-toolbar chrome://* #liberator-customize-toolbar { -moz-appearance: none !important; }
+style -name toolbarbutton-feed-icon chrome://* #liberator-customize-toolbar > #feed-button { border: none !important; background: none !important; min-width: 0 !important; padding: 0 !important; }
+
+" ex mode時IMEをOFF
+style -name commandline-ime chrome://* #liberator-commandline-command input { ime-mode: inactive; }
+
+" dolipoがブロックした要素を消す
+style -name ad-hide * .fast-hidden { display: none; }
+
+" imgsize fix
+style -name ldr-imgsize-fix http://reader.livedoor.com/reader/ .body img { max-width: 600px; max-height: 600px; }
+style -name fastladder-imgsize-fix http://fastladder.com/reader/ .body img { max-width: 600px; max-height: 600px; }
+
+" 安全なLDR
+style -name ldr-businessstyle http://reader.livedoor.com/reader/ <<EOM
+  .body img {
+    opacity: .3;
+    max-width: 150px !important;
+    max-height: 150px !important;
+EOM
+styledisable -name ldr-businessstyle
+nnoremap ,sl :styletoggle -name ldr-businessstyle<CR>
+
+" 安全なTumblr
+style -name tumblr-businessstyle tumblr.com <<EOM
+  .image {
+    opacity: 1;
+    width: 25% !important;
+    height: 25% !important;
+  }
+  img[src*="media.tumblr.com"] {
+    opacity: .3;
+    max-width: 150px !important;
+    max-height: 150px !important;
+  }
+  object embed {
+    max-width: 150px !important;
+    max-height: 150px !important;
+  }
+  .photo .photo_loading {
+    background-image: none !important;
+  }
+EOM
+styledisable -name tumblr-businessstyle
+nnoremap ,st :styletoggle -name tumblr-businessstyle<CR>
