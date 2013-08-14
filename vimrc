@@ -32,6 +32,9 @@ hi TabLineFill term=reverse cterm=reverse ctermfg=white ctermbg=black
 " python.vim
 let python_highlight_all = 1
 
+" python header
+autocmd BufNewFile *.py 0r ~/.vim/template/python.txt
+
 " NeoBundle
 set nocompatible               " Be iMproved
 if has('vim_starting')
