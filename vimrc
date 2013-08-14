@@ -1,6 +1,3 @@
-filetype plugin indent on
-syntax on
-
 " テーマ設定
 colorscheme desert
 
@@ -35,19 +32,24 @@ hi TabLineFill term=reverse cterm=reverse ctermfg=white ctermbg=black
 " python.vim
 let python_highlight_all = 1
 
-" Vundle '''
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" NeoBundle
+set nocompatible               " Be iMproved
+if has('vim_starting')
+	set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+call neobundle#rc(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle "Shougo/vimproc"
  
 " 利用中のプラグインをBundle
-Bundle 'gmarik/vundle'
-Bundle 'Shougo/neocomplcache'
-Bundle 'Shougo/unite.vim'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'thinca/vim-quickrun'
-Bundle 'thinca/vim-ref'
-Bundle 'mattn/vimplenote-vim'
-Bundle 'mattn/webapi-vim'
+NeoBundle "Shougo/unite.vim"
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'thinca/vim-ref'
+NeoBundle 'mattn/vimplenote-vim'
+NeoBundle 'mattn/webapi-vim'
+NeoBundle 'HybridText'
 
 " Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
@@ -131,8 +133,11 @@ if exists('&ambiwidth')
   set ambiwidth=double
 endif
 
+" syntax 有効化
+filetype plugin indent on
+syntax on
+
 " .vimrc.local があったら読み込む
 if filereadable(expand('~/.vimrc.local'))
   source ~/.vimrc.local
 endif
-

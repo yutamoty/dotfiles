@@ -122,3 +122,16 @@ setopt auto_cd
 
 # C-s, C-qを無効にする。
 setopt no_flow_control
+
+# ssh 先には xterm を使う
+alias ssh='TERM=xterm ssh'
+alias vagssh='TERM=xterm vagrant ssh'
+
+# rbenv
+eval "$(rbenv init -)"
+
+# z
+. `brew --prefix`/etc/profile.d/z.sh
+function precmd () {
+  z --add "$(pwd -P)"
+}
