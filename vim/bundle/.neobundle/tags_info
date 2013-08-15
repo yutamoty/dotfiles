@@ -1,9 +1,10 @@
 HybridText
-Markdown
 neobundle.vim
 neocomplcache
+neosnippet
 nerdcommenter
 unite.vim
+vim-markdown
 vim-quickrun
 vim-ref
 vimplenote-vim

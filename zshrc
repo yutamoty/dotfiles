@@ -1,5 +1,8 @@
 # ローカルの設定
-[ -f ~/.zsh_local ] && source ~/.zsh_local
+[ -f ~/.zshrc_local ] && source ~/.zshrc_local
+
+# 各環境差分の設定
+[ -f ~/.zshrc_$(uname) ] && source ~/.zshrc_$(uname)
 
 # 文字コードの設定
 export LANG=ja_JP.UTF-8
@@ -126,12 +129,3 @@ setopt no_flow_control
 # ssh 先には xterm を使う
 alias ssh='TERM=xterm ssh'
 alias vagssh='TERM=xterm vagrant ssh'
-
-# rbenv
-eval "$(rbenv init -)"
-
-# z
-. `brew --prefix`/etc/profile.d/z.sh
-function precmd () {
-  z --add "$(pwd -P)"
-}

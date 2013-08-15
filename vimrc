@@ -29,7 +29,7 @@ hi PmenuThumb ctermbg=3
 hi TabLine     term=reverse cterm=reverse ctermfg=white ctermbg=black
 hi TabLineFill term=reverse cterm=reverse ctermfg=white ctermbg=black
 
-" python.vim
+" python3.0.vim
 let python_highlight_all = 1
 
 " python header
@@ -47,12 +47,15 @@ NeoBundle "Shougo/vimproc"
 " 利用中のプラグインをBundle
 NeoBundle "Shougo/unite.vim"
 NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neosnippet'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'mattn/vimplenote-vim'
 NeoBundle 'mattn/webapi-vim'
+" syntax
 NeoBundle 'HybridText'
+NeoBundle 'plasticboy/vim-markdown'
 
 " Use neocomplcache.
 let g:neocomplcache_enable_at_startup = 1
