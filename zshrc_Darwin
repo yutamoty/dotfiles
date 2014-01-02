@@ -1,8 +1,16 @@
 # rbenv
 eval "$(rbenv init -)"
 
+# pyenv
+eval "$(pyenv init -)"
+
 # z
 . `brew --prefix`/etc/profile.d/z.sh
 function precmd () {
   z --add "$(pwd -P)"
 }
+
+# tmux pbcopy
+if [ -n "$TMUX" ]; then
+    alias pbcopy="reattach-to-user-namespace pbcopy"
+fi

@@ -126,6 +126,9 @@ setopt auto_cd
 # C-s, C-qを無効にする。
 setopt no_flow_control
 
+# tmux-copy
+alias tmux-copy='tmux save-buffer - | pbcopy'
+
 # ssh 先には xterm を使う
 alias ssh='TERM=xterm ssh'
 alias vagssh='TERM=xterm vagrant ssh'
