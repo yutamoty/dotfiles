@@ -47,17 +47,8 @@ set! browser.tabs.loadDivertedInBackground=true
 " プラグインインストール要求 無効化
 set! plugins.hide_infobar_for_missing_plugin=true
 
-" アドオンチェック無効化
-set! extensions.checkCompatibility.12.0=false
-set! extensions.checkCompatibility.13.0=false
-set! extensions.checkCompatibility.14.0=false
-set! extensions.checkCompatibility.15.0=false
-set! extensions.checkCompatibility.16.0=false
-set! extensions.checkCompatibility.17.0=false
-set! extensions.checkCompatibility.18.0=false
-set! extensions.checkCompatibility.19.0=false
-set! extensions.checkCompatibility.20.0=false
-set! extensions.checkCompatibility.21.0=false
+" 新規タブを右隣で開く
+set! browser.tabs.insertRelatedAfterCurrent=true
 
 "色設定
 "colorscheme indigo
@@ -73,10 +64,11 @@ set complete=tls
 set history=1000
 
 " ブラウザタイトルの変更
-set titlestring=Firefox
+set titlestring=firefox
 
 " GUI
-set gui=none
+" set gui=none
+set gui=noaddons,nobookmarks,menu,navigation,notabs
 
 " スクロールバーを消す
 " set noscrollbars=true
@@ -193,7 +185,7 @@ let g:auto_append_anchor = "true"
 let g:auto_append_anchor_once = "true"
 
 " statusline-toolbar.js
-lazy set statuslinetoolbars=identity-box,feed-button,showip_status_text,lpt_lastpass-compact-btn,scriptish-button,downloads-indicator,firebug-button
+lazy set statuslinetoolbars=lpt_lastpass-compact-btn,scriptish-button,firebug-button
 
 " sbmcommentsviewer.js
 let g:def_sbm_format = "id,tags,comment,timestamp"
@@ -403,7 +395,7 @@ lazy fmaps -u='^https?://mail\.google\.com/(mail|a)/' c j k n p o u e x s r a # 
 " はてブ
 lazy fmaps -u='^http://b\.hatena\.ne\.jp/(?!(entry|articles|guide))' j k o,oj e a,b
 " Tumblr
-lazy fmaps -e=vkeydown -u='^http://www\.tumblr\.com/' j k r,t q p n L,l<CR>
+lazy fmaps -e=vkeydown -u='^http://www\.tumblr\.com/' j k r,<A-r> n L,l<CR>
 " LDR/Fastladder 
 lazy fmaps -u='^http://reader\.livedoor\.com/reader/' j k s a p v z <S-z> ,r,r < > o,vj J,<Space> K,<S-Space> q w g
 nnoremap -u='^http://reader\.livedoor\.com/reader/' b :tombloo Link - LDR<CR>

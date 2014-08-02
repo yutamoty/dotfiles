@@ -1,5 +1,7 @@
 " テーマ設定
-colorscheme desert
+set background=dark
+colorscheme solarized
+" colorscheme desert
 
 " 行番号表示
 set number
@@ -34,6 +36,9 @@ let python_highlight_all = 1
 
 " python header
 autocmd BufNewFile *.py 0r ~/.vim/template/python.txt
+
+" ruby header
+autocmd BufNewFile *.rb 0r ~/.vim/template/ruby.txt
 
 " NeoBundle
 set nocompatible               " Be iMproved
